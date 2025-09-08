@@ -179,7 +179,18 @@ export function useDashboardData(userAddress: `0x${string}` | undefined) {
 
   // 使用 React Query 处理数据组合和计算
   return useQuery({
-    queryKey: ['dashboardData', userAddress, userData, totalDebt, maxBorrow, ethPrice, isLiquidatable],
+    queryKey: [
+      'dashboardData', 
+      userAddress, 
+      userData?.[0]?.toString(), // collateralAmount as string
+      userData?.[1]?.toString(), // borrowedAmount as string
+      userData?.[2]?.toString(), // lastUpdateTime as string
+      userData?.[3]?.toString(), // accumulatedInterest as string
+      totalDebt?.toString(), 
+      maxBorrow?.toString(), 
+      ethPrice?.toString(), 
+      isLiquidatable
+    ],
     queryFn: (): DashboardData => {
       if (!userData || !ethPrice) {
         // 返回默认空数据

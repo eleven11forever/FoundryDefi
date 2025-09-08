@@ -7,6 +7,7 @@ import { Web3Provider } from '@/components/providers/Web3Provider'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { Header } from '@/components/layout/Header'
 import '@/styles/globals.css'
+import '@/lib/bigint' // 引入 BigInt 序列化支持
 
 // 配置字体
 const inter = Inter({ subsets: ['latin'] })
