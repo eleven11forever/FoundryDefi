@@ -130,12 +130,12 @@ function HealthFactorCard({ address }: { address: `0x${string}` | undefined }) {
 function TotalCollateralCard({ address }: { address: `0x${string}` | undefined }) {
   const { data: dashboardData, isLoading } = useDashboardData(address)
 
-  const collateralAmount = dashboardData?.totalCollateral ?? 0n
-  const ethPrice = dashboardData?.ethPrice ?? 0n
+  const collateralAmount = dashboardData?.totalCollateral ?? BigInt(0)
+  const ethPrice = dashboardData?.ethPrice ?? BigInt(0)
 
   // 计算USD价值
   const usdValue = collateralAmount && ethPrice ? 
-    (collateralAmount * ethPrice) / 10n**18n : 0n
+    (collateralAmount * ethPrice) / (BigInt(10) ** BigInt(18)) : BigInt(0)
 
   return (
     <Card>
@@ -171,7 +171,7 @@ function TotalCollateralCard({ address }: { address: `0x${string}` | undefined }
 function TotalBorrowedCard({ address }: { address: `0x${string}` | undefined }) {
   const { data: dashboardData, isLoading } = useDashboardData(address)
 
-  const borrowedAmount = dashboardData?.totalBorrowed ?? 0n
+  const borrowedAmount = dashboardData?.totalBorrowed ?? BigInt(0)
 
   return (
     <Card>
@@ -207,7 +207,7 @@ function TotalBorrowedCard({ address }: { address: `0x${string}` | undefined }) 
 function AvailableToBorrowCard({ address }: { address: `0x${string}` | undefined }) {
   const { data: dashboardData, isLoading } = useDashboardData(address)
 
-  const availableAmount = dashboardData?.availableToBorrow ?? 0n
+  const availableAmount = dashboardData?.availableToBorrow ?? BigInt(0)
 
   return (
     <Card>

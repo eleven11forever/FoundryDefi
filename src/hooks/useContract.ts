@@ -184,26 +184,26 @@ export function useDashboardData(userAddress: `0x${string}` | undefined) {
       if (!userData || !ethPrice) {
         // 返回默认空数据
         return {
-          ethPrice: 0n,
-          totalCollateral: 0n,
-          totalBorrowed: 0n,
-          availableToBorrow: 0n,
+          ethPrice: BigInt(0),
+          totalCollateral: BigInt(0),
+          totalBorrowed: BigInt(0),
+          availableToBorrow: BigInt(0),
           healthFactor: Infinity,
           isLiquidatable: false,
           userData: {
-            collateralAmount: 0n,
-            borrowedAmount: 0n,
-            lastUpdateTime: 0n,
-            accumulatedInterest: 0n,
+            collateralAmount: BigInt(0),
+            borrowedAmount: BigInt(0),
+            lastUpdateTime: BigInt(0),
+            accumulatedInterest: BigInt(0),
           }
         }
       }
 
       // 计算抵押品价值（USD）
-      const collateralValue = (userData[0] * ethPrice) / 10n**18n
+      const collateralValue = (userData[0] * ethPrice) / (BigInt(10) ** BigInt(18))
 
       // 计算健康因子
-      const healthFactor = totalDebt && totalDebt > 0n
+      const healthFactor = totalDebt && totalDebt > BigInt(0)
         ? calculateHealthFactor(collateralValue, totalDebt)
         : Infinity
 
@@ -211,7 +211,7 @@ export function useDashboardData(userAddress: `0x${string}` | undefined) {
         ethPrice,
         totalCollateral: userData[0], // collateralAmount
         totalBorrowed: userData[1],   // borrowedAmount
-        availableToBorrow: maxBorrow || 0n,
+        availableToBorrow: maxBorrow || BigInt(0),
         healthFactor,
         isLiquidatable: isLiquidatable || false,
         userData: {

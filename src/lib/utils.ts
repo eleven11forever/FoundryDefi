@@ -36,7 +36,7 @@ export function parseTokenAmount(amount: string, decimals: number = 18): bigint 
   try {
     return parseUnits(amount, decimals)
   } catch {
-    return 0n
+    return BigInt(0)
   }
 }
 
@@ -49,7 +49,7 @@ export function calculateHealthFactor(
   debt: bigint,
   liquidationThreshold: number = 120
 ): number {
-  if (debt === 0n) return Infinity
+  if (debt === BigInt(0)) return Infinity
   const collateralValueNum = Number(formatUnits(collateralValue, 18))
   const debtNum = Number(formatUnits(debt, 18))
   return (collateralValueNum * liquidationThreshold) / (debtNum * 100)

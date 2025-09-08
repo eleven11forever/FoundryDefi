@@ -117,7 +117,7 @@ function DepositForm({ address }: { address: `0x${string}` | undefined }) {
     if (!amount || !address) return
     
     const amountWei = parseTokenAmount(amount)
-    if (amountWei > 0n) {
+    if (amountWei > BigInt(0)) {
       deposit(amountWei)
     }
   }
@@ -211,14 +211,14 @@ function BorrowForm({ address }: { address: `0x${string}` | undefined }) {
   const { data: dashboardData } = useDashboardData(address)
   const { borrow, isPending, status } = useBorrow()
 
-  const maxBorrow = dashboardData?.availableToBorrow ?? 0n
+  const maxBorrow = dashboardData?.availableToBorrow ?? BigInt(0)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!amount || !address) return
     
     const amountWei = parseTokenAmount(amount)
-    if (amountWei > 0n) {
+    if (amountWei > BigInt(0)) {
       borrow(amountWei)
     }
   }
@@ -257,7 +257,7 @@ function BorrowForm({ address }: { address: `0x${string}` | undefined }) {
                 type="button"
                 variant="outline"
                 onClick={handleMaxClick}
-                disabled={!maxBorrow || maxBorrow === 0n}
+                disabled={!maxBorrow || maxBorrow === BigInt(0)}
               >
                 最大
               </Button>
@@ -325,14 +325,14 @@ function RepayForm({ address }: { address: `0x${string}` | undefined }) {
   const { data: dashboardData } = useDashboardData(address)
   const { repay, isPending, status } = useRepay()
 
-  const totalDebt = (dashboardData?.totalBorrowed ?? 0n) + (dashboardData?.userData?.accumulatedInterest ?? 0n)
+  const totalDebt = (dashboardData?.totalBorrowed ?? BigInt(0)) + (dashboardData?.userData?.accumulatedInterest ?? BigInt(0))
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!amount || !address) return
     
     const amountWei = parseTokenAmount(amount)
-    if (amountWei > 0n) {
+    if (amountWei > BigInt(0)) {
       repay(amountWei)
     }
   }
@@ -447,14 +447,14 @@ function WithdrawForm({ address }: { address: `0x${string}` | undefined }) {
   const { data: dashboardData } = useDashboardData(address)
   const { withdraw, isPending, status } = useWithdrawCollateral()
 
-  const collateralAmount = dashboardData?.totalCollateral ?? 0n
+  const collateralAmount = dashboardData?.totalCollateral ?? BigInt(0)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!amount || !address) return
     
     const amountWei = parseTokenAmount(amount)
-    if (amountWei > 0n) {
+    if (amountWei > BigInt(0)) {
       withdraw(amountWei)
     }
   }
@@ -495,7 +495,7 @@ function WithdrawForm({ address }: { address: `0x${string}` | undefined }) {
                 type="button"
                 variant="outline"
                 onClick={handleMaxClick}
-                disabled={!collateralAmount || collateralAmount === 0n}
+                disabled={!collateralAmount || collateralAmount === BigInt(0)}
               >
                 最大
               </Button>
